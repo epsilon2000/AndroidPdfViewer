@@ -27,13 +27,13 @@ open class DefaultScrollHandle @JvmOverloads constructor(
     private var currentPos = 0f
     private val mHandler = Handler()
     private val hidePageScrollerRunnable = Runnable { hide() }
-    override fun setupLayout(pdfView: PDFView) {
+    override fun setupLayout(pdfView: PDFView?) {
         val align: Int
         val width: Int
         val height: Int
         val background: Drawable?
         // determine handler position, default is right (when scrolling vertically) or bottom (when scrolling horizontally)
-        if (pdfView.isSwipeVertical) {
+        if (pdfView?.isSwipeVertical == true) {
             width = HANDLE_LONG
             height = HANDLE_SHORT
             if (inverted) { // left
@@ -74,7 +74,7 @@ open class DefaultScrollHandle @JvmOverloads constructor(
         tvlp.addRule(CENTER_IN_PARENT, TRUE)
         addView(textView, tvlp)
         lp.addRule(align)
-        pdfView.addView(this, lp)
+        pdfView?.addView(this, lp)
         this.pdfView = pdfView
     }
 
