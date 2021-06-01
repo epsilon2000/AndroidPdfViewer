@@ -29,6 +29,9 @@ class AssetSource(private val assetName: String) : DocumentSource {
         core: PdfiumCore?,
         password: String?
     ): PdfDocument? {
+        if (context == null) {
+            return null //TODO: Workaround, better solution please
+        }
         val f = FileUtils.fileFromAsset(context, assetName)
         val pfd = ParcelFileDescriptor.open(f, ParcelFileDescriptor.MODE_READ_ONLY)
         return core?.newDocument(pfd, password)
