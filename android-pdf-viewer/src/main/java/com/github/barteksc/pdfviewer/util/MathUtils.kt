@@ -30,6 +30,7 @@ object MathUtils {
      * @param and     The biggest value the number can take.
      * @return The limited number.
      */
+    @JvmStatic
     fun limit(number: Int, between: Int, and: Int): Int {
         if (number <= between) {
             return between
@@ -55,25 +56,25 @@ object MathUtils {
             and
         } else number
     }
-
+    @JvmStatic
     fun max(number: Float, max: Float): Float {
         return if (number > max) {
             max
         } else number
     }
-
+    @JvmStatic
     fun min(number: Float, min: Float): Float {
         return if (number < min) {
             min
         } else number
     }
-
+    @JvmStatic
     fun max(number: Int, max: Int): Int {
         return if (number > max) {
             max
         } else number
     }
-
+    @JvmStatic
     fun min(number: Int, min: Int): Int {
         return if (number < min) {
             min
