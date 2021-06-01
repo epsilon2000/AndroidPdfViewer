@@ -79,13 +79,15 @@ internal class CacheManager {
 
     fun upPartIfContained(page: Int, pageRelativeBounds: RectF?, toOrder: Int): Boolean {
         val fakePart = PagePart(page, null, pageRelativeBounds!!, false, 0)
-        var found: PagePart
+        var found: PagePart? = null
         synchronized(passiveActiveLock) {
-            if (find(passiveCache, fakePart).also { found = it!! } != null) {
-                passiveCache.remove(found)
-                found.cacheOrder = toOrder
-                activeCache.offer(found)
-                return true
+            if (find(passiveCache, fakePart)?.also { found = it } != null) {
+                if (found != null) {
+                    passiveCache.remove(found)
+                    found?.cacheOrder = toOrder
+                    activeCache.offer(found)
+                    return true
+                }
             }
             return find(activeCache, fakePart) != null
         }

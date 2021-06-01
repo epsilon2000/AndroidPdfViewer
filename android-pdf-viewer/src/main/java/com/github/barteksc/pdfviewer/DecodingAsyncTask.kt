@@ -26,15 +26,15 @@ import java.lang.ref.WeakReference
 
 internal class DecodingAsyncTask(
     private val docSource: DocumentSource,
-    password: String,
-    private val userPages: IntArray,
+    password: String?,
+    private val userPages: IntArray?,
     pdfView: PDFView,
     pdfiumCore: PdfiumCore
 ) : AsyncTask<Void?, Void?, Throwable?>() {
     private var cancelled = false
     private val pdfViewReference: WeakReference<PDFView> = WeakReference(pdfView)
     private val pdfiumCore: PdfiumCore
-    private val password: String
+    private var password: String? = null
     private var pdfFile: PdfFile? = null
     override fun doInBackground(vararg params: Void?): Throwable? {
         return try {
